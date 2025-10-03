@@ -9,5 +9,8 @@ This is the original schematic as posted on https://chat.nologo.tech/d/80. The v
 
 ![Schematic of the nRF52840 ProMicro board](schematic.png)
 
+# Sleep current problems
+I wanted to use these boards to create some low power BTHome sensors. I have boards from many different sources. Some exhibit great power consumption, only 4 uA in sleep, with EXTVCC disabled. Others had a consumption of 60 uA, which is still pretty good but it's 15x more. After some component swapping, I found the problem to be the W5 marked diode. This is supposed to be a BAT60B Schottky diode, with a voltage drop of 0.24 V. On the high power consumption boards I instead measured a drop of 0.7 V, indicating a regular silicon diode. What's more concerning is that apparently the reverse leakage current of this diode was also much worse and this is what was causing the power consumption.
+
 # KiCad project
 The project in the KiCad folder is my attempt at replicating the board to identify every component's location. The USB connector is not the correct footprint, but the name in the schematic is correct. KiCad doesn't seem to have a footprint for the antenna, but the model is CA-C03.
