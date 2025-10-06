@@ -5,7 +5,7 @@ The nRF52840 ProMicro board is also known as the SuperMini board. It's a clone o
 <img src="top_bottom_red.jpg" width="50%"/>
 
 # Schematic
-This is the original schematic as posted on https://chat.nologo.tech/d/80. The voltage divider for the battery is marked as being connected to P0.04, which is an analog input pin. On the actual board it's connected to P0.24 instead, which makes it unsuitable for battery voltage measurements. Instead you can measure the battery directly on VDDH pin, but the voltage will rise when USB is plugged in.
+This is the original schematic as posted on https://chat.nologo.tech/d/80. The voltage divider for the battery is marked as being connected to P0.04, which is an analog input pin. On the actual board it's connected to P0.24 instead, which makes it unsuitable for battery voltage measurements. Instead you can measure the battery directly on VDDH pin, but the voltage will rise when USB is plugged in. To prevent this incorrect reading, you can remove the NPQ2, NBD1 and NPR7 components, and instead bridge pins 3 and 2 on the NPQ2 MOSFET. This way the nRF chip will always draw power from the battery and USB will only charge the battery and thus power the board indirectly. The voltage on VDDH will then be the actual voltage of the battery (slightly higher while charging but it won't jump to 100%). This could be problematic if your board consumed more current than the charger provided, and the battery would discharge while plugged in, so keep that in mind.
 
 ![Schematic of the nRF52840 ProMicro board](schematic.png)
 
